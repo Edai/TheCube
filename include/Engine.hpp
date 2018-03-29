@@ -7,7 +7,8 @@
 
 #include "GraphicalCore.hpp"
 #include <glm/glm.hpp>
-#include <vector>
+#include <list>
+#include <array>
 
 class Engine
 {
@@ -20,8 +21,10 @@ public:
         Instance()->Update();
         GraphicalCore::UpdateGl();
     }
+
 private:
     void Update();
+    void DrawCube();
 
 #pragma SINGLETON
 private:
@@ -38,6 +41,7 @@ public:
     }
 
 #pragma END SINGLETON
+
 
 };
 
