@@ -10,19 +10,16 @@ float GraphicalCore::rotationY = 0;
 
 void GraphicalCore::Init()
 {
-    glEnable(GL_TEXTURE_2D);
-    glShadeModel(GL_SMOOTH);
-    glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
-    glClearDepth(1.0f);
-    glDepthFunc(GL_LESS);
+    glClearColor (0.0, 0.0, 0.0, 0.0);
+    glShadeModel (GL_SMOOTH);
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_NORMALIZE);
+    glEnable(GL_TEXTURE_2D);
 }
 
 bool GraphicalCore::Run(int ac, char **av, Options *options)
 {
     glutInit(&ac, av);
-    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH) ;
+    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH) ;
     glutInitWindowPosition(0,0);
     glutInitWindowSize(options->width, options->height);
     glutCreateWindow(options->window_name.c_str());
@@ -43,7 +40,6 @@ void GraphicalCore::KeyboardHandle(unsigned char key, int x, int y)
 {
     switch (key)
     {
-        case 'q' :
         case 27:
             glutLeaveMainLoop();
             break;

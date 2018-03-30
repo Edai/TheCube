@@ -10,6 +10,7 @@ Engine *Engine::instance = nullptr;
 Engine::Engine()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glDepthFunc(GL_LESS);
     glEnable(GL_DEPTH_TEST);
     glLoadIdentity();
 
@@ -25,6 +26,8 @@ Engine::Engine()
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
     glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
     glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+
+
 }
 
 
@@ -37,9 +40,11 @@ void Engine::Update()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
+    glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glRotatef(GraphicalCore::rotationX, 1.0, 0.0, 0.0);
-    glRotatef(GraphicalCore::rotationY, 0.0, 1.0, 0.0);
+    gluLookAt(2.0f, 2.0f, 2.0f,
+              0.0f, 0.0f, 0.0f,
+              0.0f, 1.0f,  0.0f);
     glScalef(0.5f, 0.5f, 0.5f);
     DrawCube();
  }
@@ -48,7 +53,7 @@ void Engine::DrawCube()
 {
     glEnable (GL_COLOR_MATERIAL);
     glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-    glTranslatef(2f, 4.0f, 5.0f);
+    glTranslatef(2.0f, 4.0f, 5.0f);
     glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
     glBegin(GL_POLYGON);
     glVertex3f(1, -1, -1);
@@ -93,6 +98,6 @@ void Engine::DrawCube()
     glVertex3f(-1, -1,  1);
     glVertex3f(-1, -1, -1);
     glEnd();
-
+    glPopMatrix();
     glDisable(GL_COLOR_MATERIAL);
 }
