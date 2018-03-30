@@ -5,8 +5,8 @@
 #include <Engine.hpp>
 
 GraphicalCore* GraphicalCore::instance = nullptr;
-float GraphicalCore::rotationX = 0;
-float GraphicalCore::rotationY = 0;
+float GraphicalCore::rotationX = 0.0f;
+float GraphicalCore::rotationY = 0.0f;
 
 void GraphicalCore::Init()
 {
@@ -42,18 +42,6 @@ void GraphicalCore::KeyboardHandle(unsigned char key, int x, int y)
     {
         case 27:
             glutLeaveMainLoop();
-            break;
-        case 'd':
-            rotationY += 5;
-            break;
-        case 'a':
-            rotationY -= 5;
-            break;
-        case 'w':
-            rotationX += 5;
-            break;
-        case 's':
-            rotationX -= 5;
             break;
         default:
             return;
