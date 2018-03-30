@@ -13,6 +13,7 @@ Engine::Engine()
     glEnable(GL_DEPTH_TEST);
     glLoadIdentity();
     glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
 }
 
 
@@ -24,12 +25,20 @@ Engine::~Engine()
 void Engine::Update()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
+    GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+    GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+    GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
+
+    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+  glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+
     glEnable(GL_DEPTH_TEST);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
-    gluLookAt(0.95f, 2.0f, 2.5f,
-              0.0f, 1.0f, 0.0f,
-              0.0f, 1.0f,  0.0f);
+    gluLookAt(0.95f, 2.0f, 2.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,  0.0f);
     glScalef(0.5f, 0.5f, 0.5f);
     glTranslatef(2.0f, 4.0f, 5.0f);
     GraphicalCore::rotationX += 0.5f;
@@ -40,9 +49,12 @@ void Engine::Update()
 
 void Engine::DrawCube()
 {
+    GLfloat color_up[] = {0.0, 1.0, 0.0, 1.0};
+    GLfloat color_front[] = {1.0, 0.0, 0.0, 1.0};
+    GLfloat color_side[] = {0.0, 0.0, 1.0, 1.0};
+
     glEnable (GL_COLOR_MATERIAL);
-    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-    glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, color_side);
     glBegin(GL_POLYGON);
     glVertex3f(1, -1, -1);
     glVertex3f(1,  1, -1);
@@ -57,7 +69,7 @@ void Engine::DrawCube()
     glVertex3f(-1, -1, 1);
     glEnd();
 
-    glColor4f(0.0f, 1.0f, 0.0f, 1.0f);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, color_up);
     glBegin(GL_POLYGON);
     glVertex3f(1, -1, -1);
     glVertex3f(1,  1, -1);
@@ -72,7 +84,7 @@ void Engine::DrawCube()
     glVertex3f(-1, -1, -1);
     glEnd();
 
-    glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, color_front);
     glBegin(GL_POLYGON);
     glVertex3f(1,  1,  1);
     glVertex3f(1,  1, -1);

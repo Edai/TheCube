@@ -43,6 +43,18 @@ void GraphicalCore::KeyboardHandle(unsigned char key, int x, int y)
         case 27:
             glutLeaveMainLoop();
             break;
+        case '1':
+            if (glIsEnabled(GL_LIGHT0))
+            {
+                std::cout << "Light 1 disabled." << std::endl;
+                glDisable(GL_LIGHT0);
+            }
+            else
+            {
+                std::cout << "Light 1 enabled." << std::endl;
+                glEnable(GL_LIGHT0);
+            }
+            break;
         default:
             return;
     }
