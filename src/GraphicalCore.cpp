@@ -11,9 +11,6 @@ float GraphicalCore::rotationY = 0.0f;
 void GraphicalCore::Init()
 {
     glClearColor (0.0, 0.0, 0.0, 0.0);
-    glShadeModel (GL_SMOOTH);
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_TEXTURE_2D);
 }
 
 bool GraphicalCore::Run(int ac, char **av, Options *options)
@@ -25,6 +22,7 @@ bool GraphicalCore::Run(int ac, char **av, Options *options)
     glutCreateWindow(options->window_name.c_str());
     Init();
     glutIdleFunc(Engine::_Update);
+    glutReshapeFunc(Engine::_Reshape);
     glutKeyboardFunc(GraphicalCore::_KeyboardHandle);
     glutMainLoop();
     return (true);
