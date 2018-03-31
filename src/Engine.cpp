@@ -26,13 +26,13 @@ void Engine::Update()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
-    GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
-    GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-    GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
+    GLfloat light_diffuse[] = { 5.0, 7.0, 5.0, 1.0 };
+    GLfloat light_specular[] = { 5.0, 7.0, 5.0, 1.0 };
+    GLfloat light_position[] = { 5.0, 7.0, 5.0, 0.0 };
 
     glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-  glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
     glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 
     glEnable(GL_DEPTH_TEST);
@@ -54,7 +54,7 @@ void Engine::DrawCube()
     GLfloat color_side[] = {0.0, 0.0, 1.0, 1.0};
 
     glEnable (GL_COLOR_MATERIAL);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, color_side);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, color_side);
     glBegin(GL_POLYGON);
     glVertex3f(1, -1, -1);
     glVertex3f(1,  1, -1);
@@ -69,7 +69,7 @@ void Engine::DrawCube()
     glVertex3f(-1, -1, 1);
     glEnd();
 
-    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, color_up);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, color_up);
     glBegin(GL_POLYGON);
     glVertex3f(1, -1, -1);
     glVertex3f(1,  1, -1);
@@ -84,7 +84,7 @@ void Engine::DrawCube()
     glVertex3f(-1, -1, -1);
     glEnd();
 
-    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, color_front);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, color_front);
     glBegin(GL_POLYGON);
     glVertex3f(1,  1,  1);
     glVertex3f(1,  1, -1);
@@ -98,5 +98,4 @@ void Engine::DrawCube()
     glVertex3f(-1, -1,  1);
     glVertex3f(-1, -1, -1);
     glEnd();
-    glDisable(GL_COLOR_MATERIAL);
 }
