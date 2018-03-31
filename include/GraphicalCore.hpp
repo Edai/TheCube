@@ -16,12 +16,17 @@ public:
     {
         GraphicalCore::Instance()->KeyboardHandle(key, x, y);
     }
+    static void _SpecialKeyHandle(int key, int x, int y)
+    {
+        GraphicalCore::Instance()->SpecialKeyHandle(key, x, y);
+    }
     static float rotationX;
-    static float rotationY;
+    static GLfloat light0_position[4];
 
 private:
     void Init();
     void KeyboardHandle(unsigned char, int, int);
+    void SpecialKeyHandle(int key, int x, int y);
     GraphicalCore();
     ~GraphicalCore();
 

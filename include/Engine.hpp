@@ -12,10 +12,10 @@
 
 struct Material
 {
-    float mat_ambient[4];
-    float mat_diffuse[4];
-    float mat_specular[4];
-    float shine;
+    GLfloat mat_ambient[4];
+    GLfloat mat_diffuse[4];
+    GLfloat mat_specular[4];
+    GLfloat shine;
 };
 
 class Engine
@@ -38,6 +38,7 @@ private:
     void Reshape(int w, int h);
     void DrawCube();
     void SetMaterial(Material *);
+    void SetLight(GLenum nb, GLfloat *pos);
 
 #pragma SINGLETON
 private:
@@ -54,8 +55,6 @@ public:
     }
 
 #pragma END SINGLETON
-
-
 };
 
 
